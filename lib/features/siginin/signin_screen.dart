@@ -1,13 +1,13 @@
+import 'package:chatbot_ai/common_widgets.dart/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../common_widgets.dart/custom_alert_dialog.dart';
-import '../../common_widgets.dart/custom_button.dart';
 import '../../common_widgets.dart/custom_text_formfield.dart';
 import '../../common_widgets.dart/forgot_password.dart';
 import '../../common_widgets.dart/text_link.dart';
-import '../../home_screen.dart';
+import '../home_screen.dart';
 import '../../util/value_validator.dart';
 import '../sign_up/sign_up.dart';
 import 'signin_bloc/signin_bloc.dart';
@@ -47,7 +47,6 @@ class _SigninScreenState extends State<SigninScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 139, 196, 247),
         body: BlocProvider(
           create: (context) => SigninBloc(),
           child: BlocConsumer<SigninBloc, SigninState>(
@@ -77,15 +76,22 @@ class _SigninScreenState extends State<SigninScreen> {
                   child: ListView(
                     children: [
                       const SizedBox(
-                        height: 30,
+                        height: 50,
                       ),
-                      const Center(
+                      Image.asset(
+                        'assets/images/logo.png',
+                        height: 200,
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Center(
                         child: Text(
                           'Signin',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                       const SizedBox(
@@ -103,12 +109,12 @@ class _SigninScreenState extends State<SigninScreen> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _obscureText,
+                        validator: passwordValidator,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                           filled: true,
-                          fillColor: Colors.white,
                           hintText: 'password',
                           suffixIcon: IconButton(
                             onPressed: () {
@@ -141,10 +147,9 @@ class _SigninScreenState extends State<SigninScreen> {
                       const SizedBox(
                         height: 30,
                       ),
-                      CustomButton(
+                      GradientButton(
                         isLoading: state is SigninLoadingState,
-                        inverse: true,
-                        label: 'Sign In',
+                        text: 'Sign In',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<SigninBloc>(context).add(

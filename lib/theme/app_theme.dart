@@ -6,13 +6,13 @@ const Color textColor = Color(0xFF353535);
 const Color mutedIconColor = Color(0xFFA1A1A1);
 const Color mutedTextColor = Color(0xFF919191);
 const Color inputBackgroundColor = Color(0xFFF1F1F1);
-const Color cardBackgroundColor = Color(0xFFF0F0F0);
+const Color cardBackgroundColor = Color.fromARGB(255, 53, 53, 53);
 const Color cardBorderColor = Color(0xFFD8D8D8);
 const Color cardFocusBorderColor = Color.fromARGB(255, 203, 203, 203);
-const Color iconColor = Color(0xFF566273);
+const Color iconColor = Color(0xFFCFCFCF);
 // Primary color (Blue): Used for key interactive elements like buttons, links, and selected states
-const Color primaryColor = Color(0xFF0086D3);
-const Color secondaryColor = Color(0xFFC9DFF2);
+const Color primaryColor = Color(0xFF7F00FF);
+const Color secondaryColor = Color(0xFFCFCFCF);
 
 // Tertiary color (Gray): Used for less important UI elements like disabled states or subtle details
 const tertiaryColor = Color(0xFFF0F0F0);
@@ -30,7 +30,7 @@ const errorColor = Color(0xFFB00020);
 const onprimaryColor =
     Color(0xFFFFFFFF); // Text color used on primary (blue) color background
 const onSecondaryColor =
-    Color(0xFF303030); // Text color used on secondary (black) color background
+    Color(0xFFCFCFCF); // Text color used on secondary (black) color background
 const onTertiaryColor =
     Color(0xFFFFFFFF); // Text color used on tertiary (gray) color background
 const onSurfaceColor =
@@ -99,37 +99,43 @@ ThemeData appTheme = ThemeData(
     prefixIconColor: iconColor,
     floatingLabelBehavior: FloatingLabelBehavior.auto,
     contentPadding: const EdgeInsets.symmetric(
-      vertical: 5,
-      horizontal: 8,
+      vertical: 15,
+      horizontal: 15,
     ),
     fillColor: cardBackgroundColor,
     filled: true,
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(32),
       borderSide: const BorderSide(
         color: cardBorderColor,
       ),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(32),
       borderSide: const BorderSide(
         color: cardBorderColor,
       ),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(32),
       borderSide: const BorderSide(
         color: cardFocusBorderColor,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(32),
+      borderSide: BorderSide(
+        color: Colors.red[700]!,
+      ),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(32),
       borderSide: BorderSide(
         color: Colors.red[700]!,
       ),
     ),
     disabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(32),
       borderSide: const BorderSide(
         color: cardBorderColor,
       ),

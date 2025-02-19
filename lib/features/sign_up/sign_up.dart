@@ -1,10 +1,9 @@
-import 'package:chatbot_ai/home_screen.dart';
-import 'package:chatbot_ai/theme/app_theme.dart';
+import 'package:chatbot_ai/features/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common_widgets.dart/custom_alert_dialog.dart';
-import '../../common_widgets.dart/custom_button.dart';
 import '../../common_widgets.dart/custom_text_formfield.dart';
+import '../../common_widgets.dart/gradient_button.dart';
 import '../../util/value_validator.dart';
 import '../siginin/signin_screen.dart';
 import 'sign_up_bloc/sign_up_bloc.dart';
@@ -35,7 +34,6 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: backgroundColor,
         body: BlocProvider(
           create: (context) => SignUpBloc(),
           child: BlocConsumer<SignUpBloc, SignUpState>(
@@ -68,19 +66,26 @@ class _SignUpState extends State<SignUp> {
                   child: ListView(
                     children: [
                       const SizedBox(
-                        height: 15,
+                        height: 50,
                       ),
-                      const Center(
+                      Image.asset(
+                        'assets/images/logo.png',
+                        height: 200,
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Center(
                         child: Text(
                           'Sign Up',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 30,
                       ),
                       CustomTextFormField(
                         isLoading: state is SignUpLoadingState,
@@ -149,16 +154,11 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(
                         height: 15,
                       ),
-                      GradientBorderButton(
-                        onPressed: () {},
-                        text: 'Button',
-                      ),
                       const SizedBox(
                         height: 15,
                       ),
-                      CustomButton(
+                      GradientButton(
                         isLoading: state is SignUpLoadingState,
-                        inverse: true,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             BlocProvider.of<SignUpBloc>(context).add(
@@ -172,7 +172,7 @@ class _SignUpState extends State<SignUp> {
                             );
                           }
                         },
-                        label: 'Sign Up',
+                        text: 'Sign Up',
                       ),
                       const SizedBox(
                         height: 50,
@@ -204,63 +204,6 @@ class _SignUpState extends State<SignUp> {
                 ),
               );
             },
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class GradientBorderButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  final double borderWidth;
-  final double borderRadius;
-  final List<Color> borderColors;
-
-  const GradientBorderButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.borderWidth = 3.0,
-    this.borderRadius = 32.0,
-    this.borderColors = const [Colors.blue, Colors.purple],
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
-        gradient: LinearGradient(colors: borderColors), // Border Gradient
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(borderWidth),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRadius - borderWidth),
-            color: Colors.black,
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(borderRadius - borderWidth),
-              onTap: onPressed,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                child: Center(
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ),
         ),
       ),
