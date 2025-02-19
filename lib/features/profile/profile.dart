@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../common_widgets.dart/change_password.dart';
+import '../../common_widgets.dart/custom_alert_dialog.dart';
+import '../siginin/signin_screen.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -79,7 +84,10 @@ class Profile extends StatelessWidget {
           // Buttons Section
           ElevatedButton(
             onPressed: () {
-              // Handle password change
+              showDialog(
+                context: context,
+                builder: (context) => const ChangePasswordDialog(),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade600,
@@ -96,7 +104,26 @@ class Profile extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              // Handle sign out
+              showDialog(
+                context: context,
+                builder: (context) => CustomAlertDialog(
+                  title: "SIGN OUT",
+                  content: const Text(
+                    "Are you sure you want to Sign Out? Clicking 'Sign Out' will end your current session and require you to sign in again to access your account.",
+                  ),
+                  primaryButton: "SIGN OUT",
+                  onPrimaryPressed: () {
+                    Supabase.instance.client.auth.signOut();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SigninScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red.shade600,

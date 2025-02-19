@@ -1,3 +1,4 @@
+import 'package:chatbot_ai/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_button.dart';
@@ -27,8 +28,9 @@ class CustomAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       shape: RoundedRectangleBorder(
+        side: BorderSide(color: secondaryColor),
         borderRadius: BorderRadius.circular(8),
       ),
       child: SizedBox(
@@ -50,7 +52,6 @@ class CustomAlertDialog extends StatelessWidget {
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
                                 )),
                   ),
                   if (action != null) ...action!,
@@ -60,7 +61,6 @@ class CustomAlertDialog extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.close,
-                        color: Colors.black45,
                       ),
                     ),
                   ),
@@ -75,7 +75,7 @@ class CustomAlertDialog extends StatelessWidget {
                 const Divider(
                   thickness: 1,
                   height: 1,
-                  color: Colors.black12,
+                  color: secondaryColor,
                 ),
               const SizedBox(height: 5),
               if (description != null)
